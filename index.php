@@ -15,8 +15,7 @@ header("Access-Control-Allow-Headers: access-control-allow-origin,content-type")
 try{
     handleRequest();
 }catch(\Exception $e){
-    hoiEcho($e->getMessage());
-    return;
+    hoiEcho($e->getMessage()); die;
 }
 
 function handleRequest(){
@@ -45,7 +44,7 @@ function hoiPrint($text){
         hoiEcho("Finishing...");
         $printer->close();
     }catch(\Exception $e){
-        echo $e->getMessage();
+        hoiEcho($e->getMessage());
     }
 }
 
