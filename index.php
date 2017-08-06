@@ -6,11 +6,8 @@ use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 
 // Allow cors
 header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Credentials: true");
-header("Access-Control-Max-Age: 1000");
+header("Access-Control-Max-Age: 0");
 header("Access-Control-Allow-Headers: access-control-allow-origin,content-type");
-// header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
-//header("Content-Type: application/json");
 
 try{
     handleRequest();
@@ -33,7 +30,7 @@ function hoiPrint($text){
     // $connector = new FilePrintConnector("php://stdout");
     // $connector = new FilePrintConnector("/dev/usb/lp0");
     hoiEcho("Set up connection to printer");
-    $connector = new NetworkPrintConnector("192.168.1.121", 9100);
+    $connector = new NetworkPrintConnector("192.168.1.4", 9100);
     $printer = new Printer($connector);
     try{
         // ... Print stuff
