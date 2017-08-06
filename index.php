@@ -35,6 +35,10 @@ function hoiPrint($text){
     $printer = new Printer($connector);
     try{
         // ... Print stuff
+        // $printer->setFont(Printer::FONT_B);
+        // $printer->setTextSize(2, 2);
+        // $printer->setPrintMode(Printer:::MODE_DOUBLE_HEIGHT);
+        $printer->setEmphasis(true);
         $printer->text("$text\n");
         $printer->cut();
         $printer->close();
