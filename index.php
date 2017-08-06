@@ -22,7 +22,7 @@ function handleRequest(){
         $requestBody = file_get_contents('php://input');
         $req = json_decode($requestBody, true);
         $text = isset($req['text']) ? $req['text'] : "Please submit text";
-        hoiPrint($requestBody);
+        hoiPrint($text);
     }else{
         hoiEcho("See you");
     }
