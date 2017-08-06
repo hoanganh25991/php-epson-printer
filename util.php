@@ -1,6 +1,5 @@
 <?php
 function hoiEcho($msg){
-    return;
     $lineFeed = PHP_EOL;
     echo "$msg$lineFeed";
 }

@@ -12,7 +12,8 @@ header("Access-Control-Allow-Headers: access-control-allow-origin,content-type")
 try{
     handleRequest();
 }catch(\Exception $e){
-    hoiEcho($e->getMessage()); die;
+    hoiEcho("Something wrong");
+    hoiEcho($e->getMessage());
 }
 
 function handleRequest(){
@@ -20,25 +21,22 @@ function handleRequest(){
     if(isPost()){
         $requestBody = file_get_contents('php://input');
         $req = json_decode($requestBody, true);
-        hoiPrint($req['text']);
+        $text = isset($req['text']) ? $req['text'] : "Please submit text";
+        hoiPrint($requestBody);
     }else{
-        echo "See you";
+        hoiEcho("See you");
     }
 }
 
 function hoiPrint($text){
-    // $connector = new FilePrintConnector("php://stdout");
-    // $connector = new FilePrintConnector("/dev/usb/lp0");
     hoiEcho("Set up connection to printer");
+    hoiEcho($text);
     $connector = new NetworkPrintConnector("192.168.1.4", 9100);
     $printer = new Printer($connector);
     try{
         // ... Print stuff
-        hoiEcho("Printing...");
-        $printer->text($text);
-        hoiEcho("Cutting...");
+        $printer->text("$text\n");
         $printer->cut();
-        hoiEcho("Finishing...");
         $printer->close();
     }catch(\Exception $e){
         hoiEcho($e->getMessage());
