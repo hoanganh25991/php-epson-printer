@@ -31,7 +31,7 @@ function handleRequest(){
 function hoiPrint($text){
     hoiEcho("Set up connection to printer");
     hoiEcho($text);
-    $connector = new NetworkPrintConnector("192.168.1.4", 9100);
+    $connector = new NetworkPrintConnector("192.168.1.121", 9100);
     $printer = new Printer($connector);
     try{
         // ... Print stuff
@@ -40,7 +40,7 @@ function hoiPrint($text){
         // $printer->setPrintMode(Printer:::MODE_DOUBLE_HEIGHT);
         $printer->setEmphasis(true);
         $printer->text("$text\n");
-        $printer->cut();
+        $printer->cut(Printer::CUT_FULL, 1);
         $printer->close();
     }catch(\Exception $e){
         hoiEcho($e->getMessage());
