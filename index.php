@@ -31,7 +31,7 @@ function handleRequest(){
 function hoiPrint($text){
     hoiEcho("Set up connection to printer");
     hoiEcho($text);
-    $connector = new NetworkPrintConnector("192.168.1.121", 9100);
+    $connector = new NetworkPrintConnector("192.168.1.3", 9100);
     $printer = new Printer($connector);
     try{
         // ... Print stuff
