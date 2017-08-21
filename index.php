@@ -31,11 +31,11 @@ function handleRequest(){
 function hoiPrint($text){
     hoiEcho("Set up connection to printer");
     hoiEcho($text);
-    $connector = new NetworkPrintConnector("192.168.1.3", 9100);
+    $connector = new NetworkPrintConnector("192.168.1.123", 9100);
     $printer = new Printer($connector);
     try{
         // ... Print stuff
-        // $printer->setFont(Printer::FONT_B);
+        $printer->setFont(Printer::FONT_B);
         // $printer->setTextSize(2, 2);
         // $printer->setPrintMode(Printer:::MODE_DOUBLE_HEIGHT);
         $printer->setEmphasis(true);
