@@ -48,7 +48,7 @@ function handleRequest(){
 function hoiPrint($data, $type){
     hoiEcho("Set up connection to printer");
 	hoiEcho("I see print type: $type");
-    $connector = new NetworkPrintConnector("192.168.1.123", 9100);
+    $connector = new NetworkPrintConnector("192.168.1.3", 9100);
     $printer = new Printer($connector);
     // Print stuff
     switch($type){

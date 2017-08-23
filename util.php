@@ -10,7 +10,7 @@ function isPost(){
     return $isPost;
 }
 
-function isPost(){
+function isGet(){
     $isGet = $_SERVER['REQUEST_METHOD'] === 'GET';
     return $isGet;
 }
