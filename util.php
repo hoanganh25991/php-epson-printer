@@ -1,6 +1,6 @@
 <?php
 function hoiEcho($msg){
-    return;
+    // return;
     $lineFeed = PHP_EOL;
     echo "$msg$lineFeed";
 }
@@ -8,6 +8,11 @@ function hoiEcho($msg){
 function isPost(){
     $isPost = $_SERVER['REQUEST_METHOD'] === 'POST';
     return $isPost;
+}
+
+function isPost(){
+    $isGet = $_SERVER['REQUEST_METHOD'] === 'GET';
+    return $isGet;
 }
 
 
