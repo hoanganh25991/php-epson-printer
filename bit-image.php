@@ -11,7 +11,7 @@ $connector = new NetworkPrintConnector("192.168.1.123", 9100);
 $printer = new Printer($connector);
 
 try {
-    $tux = EscposImage::load("receipt2.png", false);
+    $tux = EscposImage::load("receipt4.png", false);
 
     // $printer -> text("These example images are printed with the older\nbit image print command. You should only use\n\$p -> bitImage() if \$p -> graphics() does not\nwork on your printer.\n\n");
     
