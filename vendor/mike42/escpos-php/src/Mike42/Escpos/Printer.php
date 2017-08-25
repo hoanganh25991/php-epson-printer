@@ -483,10 +483,15 @@ class Printer
         $this -> setLineSpacing(16); // 16-dot line spacing. This is the correct value on both TM-T20 and TM-U220
         // Header and density code (0, 1, 32, 33) re-used for every line
         $densityCode = ($highDensityHorizontal ? 1 : 0) + ($highDensityVertical ? 32 : 0);
+//	    var_dump(chr($densityCode)); die;
         $colFormatData = $img -> toColumnFormat($highDensityVertical);
+//	    var_dump($colFormatData); die;
         $header = Printer::dataHeader(array($img -> getWidth()), true);
+	    var_dump($header); die;
         foreach ($colFormatData as $line) {
             // Print each line, double density etc for printing are set here also
+	        $msg = self::ESC . "*" . chr($densityCode) . $header . $line;
+	        echo $msg;
             $this -> connector -> write(self::ESC . "*" . chr($densityCode) . $header . $line);
             $this -> feed();
             // sleep(0.1); // Reduces the amount of trouble that a TM-U220 has keeping up with large images
