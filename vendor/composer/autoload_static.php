@@ -11,12 +11,20 @@ class ComposerStaticInita416f6301b79a9588e56c637e27238e9
         array (
             'Mike42\\' => 7,
         ),
+        'L' => 
+        array (
+            'LZCompressor\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Mike42\\' => 
         array (
             0 => __DIR__ . '/..' . '/mike42/escpos-php/src/Mike42',
+        ),
+        'LZCompressor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nullpunkt/lz-string-php/src/LZCompressor',
         ),
     );
 

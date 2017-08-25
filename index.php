@@ -3,6 +3,7 @@ require __DIR__ . '/vendor/autoload.php';
 require_once './util.php';
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\CapabilityProfile;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 
 define("PRINT_IMAGE", "PRINT_IMAGE");
@@ -48,8 +49,9 @@ function handleRequest(){
 function hoiPrint($data, $type){
     hoiEcho("Set up connection to printer");
 	hoiEcho("I see print type: $type");
-    $connector = new NetworkPrintConnector("192.168.1.3", 9100);
-    $printer = new Printer($connector);
+	$profile = CapabilityProfile::load("simple");
+    $connector = new NetworkPrintConnector("192.168.9.91", 9100);
+    $printer = new Printer($connector, $profile);
     // Print stuff
     switch($type){
         case PRINT_IMAGE:
