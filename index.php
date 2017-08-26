@@ -52,6 +52,7 @@ function hoiPrint($data, $type){
 	$profile = CapabilityProfile::load("simple");
     $connector = new NetworkPrintConnector("192.168.9.91", 9100);
     $printer = new Printer($connector, $profile);
+
     // Print stuff
     switch($type){
         case PRINT_IMAGE:
@@ -65,8 +66,13 @@ function hoiPrint($data, $type){
 				throw new \Exception("Fail to create image file");
 			}
 
-	        $tux = EscposImage::load($file, false);
-	        $printer->bitImage($tux);
+	        // $tux = EscposImage::load($file, false);
+	        // $printer->bitImage($tux);
+			$printer->close();
+	        $printer->isClosed = true;
+			$cwd = __DIR__;
+	        $cmd = "node $cwd/node-epson-printer/src/print.js $file";
+			echo shell_exec($cmd);
 	        unlink($file);
 	        break;
         default:
@@ -74,8 +80,9 @@ function hoiPrint($data, $type){
 	        $printer->text("$data\n");
 	        break;
     }
-    $printer->cut(Printer::CUT_FULL, 1);
-    $printer->close();
+	if(isset($printer->isClosed) && $printer->isClosed) return;
+	$printer->cut(Printer::CUT_FULL, 1);
+	$printer->close();
 }
 
 
