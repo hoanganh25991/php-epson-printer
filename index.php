@@ -49,7 +49,7 @@ function handleRequest(){
 function hoiPrint($data, $type){
     hoiEcho("Set up connection to printer");
 	hoiEcho("I see print type: $type");
-	$profile = CapabilityProfile::load("simple");
+	$profile = CapabilityProfile::load('simple');
     $connector = new NetworkPrintConnector("192.168.9.91", 9100);
     $printer = new Printer($connector, $profile);
     // Print stuff
@@ -71,6 +71,7 @@ function hoiPrint($data, $type){
 	        break;
         default:
 	        $printer->setEmphasis(true);
+	        $printer->setJustification(Printer::JUSTIFY_CENTER);
 	        $printer->text("$data\n");
 	        break;
     }
