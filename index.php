@@ -70,7 +70,7 @@ function hoiPrint($data, $type){
 	        unlink($file);
 	        break;
         default:
-	        $printer->setEmphasis(true);
+	        // $printer->setEmphasis(true);
 	        $printer->setJustification(Printer::JUSTIFY_CENTER);
 	        $printer->text("$data\n");
 	        break;
