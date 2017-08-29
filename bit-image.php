@@ -16,8 +16,8 @@ try {
 
     // $printer -> text("These example images are printed with the older\nbit image print command. You should only use\n\$p -> bitImage() if \$p -> graphics() does not\nwork on your printer.\n\n");
     
-    // $printer -> bitImage($tux);
-    $printer -> bitImageColumnFormat($tux, Printer::IMG_DOUBLE_WIDTH | Printer::IMG_DOUBLE_HEIGHT);
+    $printer -> bitImage($tux);
+    // $printer -> bitImageColumnFormat($tux, Printer::IMG_DOUBLE_WIDTH | Printer::IMG_DOUBLE_HEIGHT);
     // $printer -> bitImageColumnFormat($tux);
     // $printer -> text("Regular Tux (bit image).\n");
     $printer -> feed();
