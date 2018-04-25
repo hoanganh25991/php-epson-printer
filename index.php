@@ -47,36 +47,41 @@ function handleRequest(){
 }
 
 function hoiPrint($data, $type){
-    hoiEcho("Set up connection to printer");
-	hoiEcho("I see print type: $type");
-	$profile = CapabilityProfile::load('simple');
-    $connector = new NetworkPrintConnector("192.168.9.91", 9100);
-    $printer = new Printer($connector, $profile);
-    // Print stuff
-    switch($type){
-        case PRINT_IMAGE:
-	        $data = str_replace('data:image/png;base64,', '', $data);
-	        $data = str_replace(' ', '+', $data);
-	        $data = base64_decode($data); // Decode image using base64_decode
-	        $file = uniqid() . '.png'; //Now you can put this image data to your desired file using file_put_contents function like below:
-	        $success = file_put_contents($file, $data);
+    try{
+        hoiEcho("Set up connection to printer");
+        hoiEcho("I see print type: $type");
+        $profile = CapabilityProfile::load('simple');
+        $connector = new NetworkPrintConnector("192.168.9.91", 9100);
+        $printer = new Printer($connector, $profile);
+        // Print stuff
+        switch($type){
+            case PRINT_IMAGE:
+                $data = str_replace('data:image/png;base64,', '', $data);
+                $data = str_replace(' ', '+', $data);
+                $data = base64_decode($data); // Decode image using base64_decode
+                $file = uniqid() . '.png'; //Now you can put this image data to your desired file using file_put_contents function like below:
+                $success = file_put_contents($file, $data);
 
-			if(!$success){
-				throw new \Exception("Fail to create image file");
-			}
+                if(!$success){
+                    throw new \Exception("Fail to create image file");
+                }
 
-	        $tux = EscposImage::load($file, false);
-	        $printer->bitImage($tux);
-	        unlink($file);
-	        break;
-        default:
-	        // $printer->setEmphasis(true);
-	        $printer->setJustification(Printer::JUSTIFY_CENTER);
-	        $printer->text("$data\n");
-	        break;
+                $tux = EscposImage::load($file, false);
+                $printer->bitImage($tux);
+                unlink($file);
+                break;
+            default:
+                // $printer->setEmphasis(true);
+                $printer->setJustification(Printer::JUSTIFY_CENTER);
+                $printer->text("$data\n");
+                break;
+        }
+        $printer->cut(Printer::CUT_FULL, 1);
+        $printer->close();
+    }catch(\Exception $e){
+        hoiEcho($e->getMessage());
+        return null;
     }
-    $printer->cut(Printer::CUT_FULL, 1);
-    $printer->close();
 }
 
 
